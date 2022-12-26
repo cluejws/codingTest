@@ -1,0 +1,34 @@
+# deepcopy 이용
+# time : 8.503361463546753
+from copy import deepcopy
+
+list_a = [i for i in range(100)]
+list_b = []
+for _ in range(1000):
+    list_b = deepcopy(list_a)
+
+
+
+# time : 0.05186152458190918
+list_a = [i for i in range(100)]
+list_b = []
+for _ in range(100000):
+    list_b = list_a[:]
+_________________________________________
+
+# deepcopy 이용
+# time : 6.350424289703369
+from copy import deepcopy
+
+list_a = [[i for i in range(100)] for _ in range(100)]
+list_b = []
+for _ in range(1000):
+    list_b = deepcopy(list_a)
+
+
+
+# time : 0.049834251403808594
+list_a = [[i for i in range(100)] for _ in range(100)]
+list_b = []
+for _ in range(1000):
+    list_b = [item[:] for item in list_a]
