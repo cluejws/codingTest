@@ -35,12 +35,8 @@ while len(queue) != 0:
         if visited[minus_pos] == -1:
             queue.append(minus_pos)
             visited[minus_pos] = visited[pos] + 1
-        else:
-            visited[minus_pos] = min(visited[pos]+1, visited[minus_pos])
 
     if check(plus_pos):
         if visited[plus_pos] == -1:
             queue.append(plus_pos)
             visited[plus_pos] = visited[pos] + 1
-        else:
-            visited[plus_pos] = min(visited[pos]+1, visited[plus_pos])
