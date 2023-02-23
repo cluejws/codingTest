@@ -5,12 +5,13 @@ def getResult():
         return
     
     for i in range(len(line)):
-        if line[i] in arr:
-            continue
-        
-        arr.append(line[i])
-        getResult()
-        arr.pop()
+
+        if visited[i] == False:
+            visited[i] = True
+            arr.append(line[i])
+            getResult()
+            arr.pop()
+            visited[i] = False
 
 # 입력
 import sys
@@ -24,4 +25,5 @@ line.sort()
 
 # 계산2: 백트래킹
 arr = []
+visited = [0 for i in range(n)]
 getResult()
