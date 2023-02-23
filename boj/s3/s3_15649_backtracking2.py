@@ -5,12 +5,12 @@ def getResult():
         return
     
     for i in range(1, n+1):
-        if i in arr:
-            continue
-        else:
+        if visited[i] == False:
+            visited[i] = True
             arr.append(i)
             getResult()
             arr.pop()
+            visited[i] = False
     
 # 입력
 import sys
@@ -20,4 +20,5 @@ n, m = map(int,input().split())
 
 # 계산
 arr = []
+visited = [False for _ in range(n+1)]
 getResult()
