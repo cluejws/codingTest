@@ -10,12 +10,10 @@ dp = [math.inf for _ in range(n+1)]
 dp[0] = 0
 
 # 계산2: dp
-for coin in coins:
-    
-    for j in range(coin, n+1):
-        
-        if j - coin >= 0:
-            dp[j] = min(dp[j], dp[j - coin] + 1) 
+for i in range(1, n+1):
+    for coin in coins:
+        if i >= coin:
+            dp[i] = min(dp[i], dp[i - coin] + 1)
 
 # 출력
 if dp[n] == math.inf:
