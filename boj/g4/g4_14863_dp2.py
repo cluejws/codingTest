@@ -13,23 +13,24 @@ for _ in range(n):
 # 계산: dp
 # dp[i][j] = i번째까지 고려했을때 j시간일때 최대 가치
 dp = [[0 for _ in range(k+1)] for _ in range(n)]
-for i in range(n):
+
+# 계산1: dp 초기화
+dp[0][time[0][0]] = max(dp[0][time[0][0]], price[0][0])
+dp[0][time[0][1]] = max(dp[0][time[0][1]], price[0][1])
+
+# 계산2: dp 계산
+for i in range(1, n):
     for j in range(k+1):
 
-        # 1. (최대 누적) 도보
-        # -> 만약 if 만족하면 (dp[i][j] = 0 일때)
-        if j >= time[i][0]:
+        # 1. 도보
+        # -> 만약 if 만족하면 (도보 일때)
+        if j >= time[i][0] and dp[i-1][j - time[i][0]] > 0:
             dp[i][j] = max(dp[i][j], dp[i-1][j - time[i][0]] + price[i][0])
         
-        # 2. (최대 누적) 자전거
-        # -> 만약 if 만족하면 (dp[i][j] = 0 일때, 도보 일때)
-        if j >= time[i][1]:
+        # 2. 자전거
+        # -> 만약 if 만족하면 (도보 일때, 자전거 일때)
+        if j >= time[i][1] and dp[i-1][j - time[i][1]] > 0:
             dp[i][j] = max(dp[i][j], dp[i-1][j - time[i][1]] + price[i][1])
-        
-        # 3. 불가능
-        if j < time[i][0] and j < time[i][1]:
-            dp[i][j] = dp[i-1][j]
-
+            
 # 출력
-print(dp[n-1][k])
-    
+print(max(dp[n-1]))
